@@ -7,7 +7,7 @@ $password = '';
 
     $conn = mysqli_connect($server, $username, $password, $dbname) or die('connection failed');
 
-    if(isset($_POST['send']) {
+    if(isset($_POST['send'])) {
         $name = mysqli_real_escape_string($conn, $_POST['number']);
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $number = mysqli_real_escape_string($conn, $_POST['number']);
