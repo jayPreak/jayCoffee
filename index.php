@@ -1,3 +1,31 @@
+<?php
+$server = 'localhost';
+$dbname = 'contact_db';
+$username = 'root';
+$password = '';
+
+
+    $conn = mysqli_connect($server, $username, $password, $dbname) or die('connection failed');
+
+    if(isset($_POST['send']) {
+        $name = mysqli_real_escape_string($conn, $_POST['number']);
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $number = mysqli_real_escape_string($conn, $_POST['number']);
+        $msg = mysqli_real_escape_string($conn, $_POST['message']);
+
+
+        $select_message = mysqli_query($conn, "SELECT * FROM `contact_form` WHERE name = '$name' AND email = '$email' AND number = '$number' AND  message = '$msg'") or die('query failed');
+        if(mysqli_num_rows($select_message) > 0){
+            $message[] = 'message already sent';
+        } else {
+            mysqli_query($conn, "INSERT INTO `contact_form`(name, email, number, message) VALUES('$name', '$email', $'number', '$msg')") or die('query failed');
+            $message[] = 'message sent';
+        }
+    })
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +38,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 </head>
 <body>
+
+
+    <?php
+        if(isset($$message)) {
+            foreach($$message as $$message) {
+                echo '
+                <div class="message" data-aos="zoom-out">
+                    <span>'.$message.'</span>
+                    <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
+                </div>
+                ';
+            }
+        }
+    
+    ?>
     <header class = "header">
         <div id="menu-btn" class="fas fa-bars"></div>
         <a href="#home" class="logo">jayCoffee</a>
@@ -17,8 +60,8 @@
             <a href="#home" class="active">home</a>
             <a href="#about">about</a>
             <a href="#services">services</a>
-            <a href="#portfolio">portfolio</a>
-            <a href="#contact">contact</a>
+            <a href="#staff">Staff</a>
+            <a href="#contact">contact us</a>
         </nav>
 
         <div class="follow">
@@ -218,7 +261,7 @@
 
     </section>
 
-    <section class="portfolio" id="portfolio">
+    <section class="staff" id="staff">
 
         <h1 class="heading" data-aos="fade-up"> <span>our staff</span> </h1>
 
@@ -263,6 +306,46 @@
         </div>
 
     </section>
+
+    <section class="contact" id="contact">
+
+        <h1 class="heading" data-aos="fade-up"> <span>contact me</span> </h1>
+
+        <form action="" method="post">
+            <div class="flex">
+                <input data-aos="fade-right" type="text" name="name" placeholder="enter your name" class="box" required>
+                <input data-aos="fade-left" type="email" name="email" placeholder="enter your email" class="box" required>
+            </div>
+            <input data-aos="fade-up" type="number" min="0" name="number" placeholder="enter your number" class="box" required>
+            <textarea data-aos="fade-up" name="message" class="box" required placeholder="enter your message" cols="30" rows="10"></textarea>
+            <input type="submit" data-aos="zoom-in" value="send message" name="send" class="btn">
+        </form>
+
+        <div class="box-container">
+
+            <div class="box" data-aos="zoom-in">
+                <i class="fas fa-phone"></i>
+                <h3>phone</h3>
+                <p>+91 9582111131</p>
+            </div>
+
+            <div class="box" data-aos="zoom-in">
+                <i class="fas fa-envelope"></i>
+                <h3>email</h3>
+                <p>jayesh.preak2003@gmail.com</p>
+            </div>
+
+            <div class="box" data-aos="zoom-in">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>address</h3>
+                <p>haryana, india - 122002</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="credit"> &copy; copyright @ <?php echo date('d/m/Y'); ?> by <a href= "https://github.com/jayPreak"><span> Jayesh Bhushan</span></a></div>
 
 
 <script src="js/script.js"></script>
