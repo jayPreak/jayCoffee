@@ -21,7 +21,7 @@ $password = '';
             mysqli_query($conn, "INSERT INTO `contact_form`(name, email, number, message) VALUES('$name', '$email', $'number', '$msg')") or die('query failed');
             $message[] = 'message sent';
         }
-    })
+    }
 
 ?>
 
