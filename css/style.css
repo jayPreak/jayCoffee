@@ -268,20 +268,24 @@ section{
 }
 
 .about .skills .progress .bar:nth-child(1) h3{
-   width: 95%;
+   width: 40%;
 }
 
 .about .skills .progress .bar:nth-child(2) h3{
-   width: 80%;
+   width: 30%;
 }
 
 .about .skills .progress .bar:nth-child(3) h3{
-   width: 65%;
+   width: 15%;
 }
 
 .about .skills .progress .bar:nth-child(4) h3{
-   width: 80%;
+   width: 10%;
 }
+
+.about .skills .progress .bar:nth-child(5) h3{
+    width: 5%;
+ }
 
 .about .edu-exp .row{
    display: flex;
