@@ -7,21 +7,23 @@ $password = '';
 
     $conn = mysqli_connect($server, $username, $password, $dbname) or die('connection failed');
 
-    if(isset($_POST['send'])) {
-        $name = mysqli_real_escape_string($conn, $_POST['number']);
+    if(isset($_POST['send'])){
+
+        $name = mysqli_real_escape_string($conn, $_POST['name']);
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $number = mysqli_real_escape_string($conn, $_POST['number']);
         $msg = mysqli_real_escape_string($conn, $_POST['message']);
-
-
-        $select_message = mysqli_query($conn, "SELECT * FROM `contact_form` WHERE name = '$name' AND email = '$email' AND number = '$number' AND  message = '$msg'") or die('query failed');
+     
+        $select_message = mysqli_query($conn, "SELECT * FROM `contact_form` WHERE name = '$name' AND email = '$email' AND number = '$number' AND message = '$msg'") or die('query failed');
+        
         if(mysqli_num_rows($select_message) > 0){
-            $message[] = 'message already sent';
-        } else {
-            mysqli_query($conn, "INSERT INTO `contact_form`(name, email, number, message) VALUES('$name', '$email', $'number', '$msg')") or die('query failed');
-            $message[] = 'message sent';
+           $message[] = 'message sent already!';
+        }else{
+           mysqli_query($conn, "INSERT INTO `contact_form`(name, email, number, message) VALUES('$name', '$email', '$number', '$msg')") or die('query failed');
+           $message[] = 'message sent successfully!';
         }
-    }
+     
+     }
 
 ?>
 
@@ -41,16 +43,16 @@ $password = '';
 
 
     <?php
-        if(isset($$message)) {
-            foreach($$message as $$message) {
-                echo '
-                <div class="message" data-aos="zoom-out">
-                    <span>'.$message.'</span>
-                    <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
-                </div>
-                ';
+        if(isset($message)){
+            foreach($message as $message){
+               echo '
+               <div class="message" data-aos="zoom-out">
+                  <span>'.$message.'</span>
+                  <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
+               </div>
+               ';
             }
-        }
+         }
     
     ?>
     <header class = "header">
